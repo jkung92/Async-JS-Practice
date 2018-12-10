@@ -130,13 +130,50 @@ function getMoreFavNumFacts2() {
 
 // ####### Part 3 : Gotta Catch 'Em All! #########
 
-let url = 'https://pokeapi.co/api/v2/';
+let url = 'https://pokeapi.co/api/v2';
 console.log('hello');
 
 const getPokeList = () => {
-  $.getJSON(`${url}/pokemon`)
+  $.getJSON(`${url}/pokemon/`)
     .then(resp => console.log(resp))
     .catch(err => console.log(err));
+};
+
+const getRandomPoke = () => {
+  let pokeList = [];
+  let pokeSpecies = [];
+  axios
+    .get(`${url}/pokemon/6/`)
+    .then(resp => {
+      console.log(resp.data);
+      pokeList.push(resp.data.name);
+      return axios.get(`${url}/pokemon/8/`);
+    })
+    .then(resp => {
+      pokeList.push(resp.data.name);
+      return axios.get(`${url}/pokemon/10/`);
+    })
+    .then(resp => {
+      pokeList.push(resp.data.name);
+      console.log(pokeList);
+      return axios.get(`${url}/pokemon-species/6/`);
+    })
+    .catch(err => console.log(err));
+};
+
+const getRandomPoke2 = () => {
+  let poke = [];
+  for (let i = 1; i < 4; i++) {
+    let randomIndex = Math.floor(Math.random() * 949);
+    $.getJSON(`${url}/pokemon/${randomIndex}/`, resp => {
+      let pokeName = resp.name;
+      $.getJSON(`${url}/pokemon-species/${randomIndex}/`, resp => {
+        let pokeSpecies = resp.flavor_text_entries[1].flavor_text;
+        poke.push({ name: pokeName, species: pokeSpecies });
+      });
+    });
+  }
+  console.log(poke);
 };
 
 getPokeList();
