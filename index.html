@@ -5,13 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Aysnc Code</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <style>
+    .card-deck img:nth-child(even) {
+      transform: rotate(20deg);
+    }
+    .card-deck img:nth-child(odd) {
+      transform: rotate(40deg);
+    }
+  </style>
 </head>
 <body>
-  <h1>NumFacts</h1>
+  <!-- <h1>NumFacts</h1>
   <ol class="content"></ol>
 
   <h2>More Num Facts</h2>
-  <ol class="content2"></ol>
+  <ol class="content2"></ol> -->
+  <main class="container">
+    <button type="button" class="btn btn-secondary">Gimme a Card</button>
+
+    <div class="card-deck position-relative my-4">
+
+    </div>
+  </main>
 
   <script
   src="http://code.jquery.com/jquery-3.3.1.min.js"

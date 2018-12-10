@@ -73,6 +73,70 @@ function getMoreFavNumFacts2() {
     .catch(err => console.log(err));
 }
 
-getNumberFact2();
-getMultipleNumFacts2();
-getMoreFavNumFacts2();
+// getNumberFact2();
+// getMultipleNumFacts2();
+// getMoreFavNumFacts2();
+
+// Deck of Cards
+
+// Draw random card
+// $.getJSON('https://deckofcardsapi.com/api/deck/new/draw/?count=1', resp => {
+//   console.log(resp, resp.cards[0].suit, resp.cards[0].value);
+// });
+
+// Draw two cards from the same deck
+// $.getJSON('https://deckofcardsapi.com/api/deck/new/draw/?count=1', resp1 => {
+//   const deck = resp1.deck_id;
+//   $.getJSON(
+//     `https://deckofcardsapi.com/api/deck/${deck}/draw/?count=1`,
+//     resp2 => {
+//       console.log(resp1, resp1.cards[0].suit, resp1.cards[0].value);
+//       console.log(resp2, resp2.cards[0].suit, resp2.cards[0].value);
+//     }
+//   );
+// });
+
+// let deck;
+// let cardStackOrder = 1;
+
+// // JSON to get a deck of cards
+// const getDeck = () => {
+//   // get deck of cards from API
+//   $.getJSON('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
+//     .then(resp => (deck = resp))
+//     .catch(err => console.log(err));
+// };
+
+// // Draw a card
+// const drawCard = () => {
+//   $.getJSON(`https://deckofcardsapi.com/api/deck/${deck.deck_id}/draw/?count=1`)
+//     .then(resp => {
+//       console.log(resp);
+//       $('.card-deck').append(
+//         `<img src="${
+//           resp.cards[0].image
+//         }" alt="" style="position:absolute; z-index:${cardStackOrder}">`
+//       );
+//       cardStackOrder += 1;
+//     })
+//     .catch(err => console.log(err));
+// };
+
+// // init deck of cards
+// getDeck();
+
+// // add event listener for button
+// $('button').on('click', drawCard);
+
+// ####### Part 3 : Gotta Catch 'Em All! #########
+
+let url = 'https://pokeapi.co/api/v2/';
+console.log('hello');
+
+const getPokeList = () => {
+  $.getJSON(`${url}/pokemon`)
+    .then(resp => console.log(resp))
+    .catch(err => console.log(err));
+};
+
+getPokeList();
