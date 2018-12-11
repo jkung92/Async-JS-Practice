@@ -190,10 +190,17 @@ const helper = async () => {
   let poke = await $.getJSON(`${url}/pokemon/${randomIndex}/`);
   let pokeInfo = await $.getJSON(`${url}/pokemon-species/${randomIndex}/`);
 
+  const speciesEnglish = pokeInfo.flavor_text_entries.find(
+    poke => poke.language.name === 'en'
+  );
+  const speciesText = speciesEnglish.flavor_text;
+
+  console.log('Species:', pokeInfo);
+
   let card = {
     name: poke.name,
     img: poke.sprites.front_default,
-    species: pokeInfo.flavor_text_entries[1].flavor_text
+    species: speciesText
   };
   return card;
 };
