@@ -186,7 +186,7 @@ const getRandomPoke = () => {
 };
 
 const helper = async () => {
-  let randomIndex = Math.floor(Math.random() * 949);
+  let randomIndex = Math.floor(Math.random() * 100);
   let poke = await $.getJSON(`${url}/pokemon/${randomIndex}/`);
   let pokeInfo = await $.getJSON(`${url}/pokemon-species/${randomIndex}/`);
 
@@ -199,15 +199,23 @@ const helper = async () => {
 };
 
 const getRandomPoke3 = async () => {
-  let poke = await helper();
-  const template = `
+  // let poke = await helper();
+  let pokemons = await Promise.all([
+    await helper(),
+    await helper(),
+    await helper()
+  ]);
+
+  for (let poke of pokemons) {
+    const template = `
       <div class="p-4">
         <h2>${poke.name}</h2>
         <img src="${poke.img}" alt="">
         <p>${poke.species}</p>
       </div>
-      `;
-  $('.container').append(template);
+    `;
+    $('.container').append(template);
+  }
 };
 
 getPokeList();
