@@ -4,11 +4,16 @@
 //   });
 // }
 
-function getNumberFact2() {
-  $.getJSON('http://numbersapi.com/8?json')
-    .then(resp => console.log(resp.text))
-    .catch(err => console.log(err, 'Number fact not found'));
-}
+const getRandomNumberFact = async () => {
+  const fact = await $.getJSON('http://numbersapi.com/8?json');
+  console.log(fact.text);
+};
+
+// function getNumberFact2() {
+//   $.getJSON('http://numbersapi.com/8?json')
+//     .then(resp => console.log(resp.text))
+//     .catch(err => console.log(err, 'Number fact not found'));
+// }
 
 // function getMultipleNumFacts() {
 //   $.getJSON('http://numbersapi.com/1,5,10?json', resp => {
@@ -19,13 +24,34 @@ function getNumberFact2() {
 //   });
 // }
 
-function getMultipleNumFacts2() {
-  $.getJSON('http://numbersapi.com/1,5,10?json').then(resp => {
-    for (let r in resp) {
-      $('.content').append(`<li>${resp[r].text}</li>`);
-    }
-  });
-}
+const getMultipleNumberFacts = async () => {
+  const facts = await $.getJSON('http://numbersapi.com/1,5,10?json');
+  for (let fact in facts) {
+    $('.content').append(`<li>${facts[fact].text}</li>`);
+  }
+};
+
+// function getMultipleNumFacts2() {
+//   $.getJSON('http://numbersapi.com/1,5,10?json').then(resp => {
+//     for (let r in resp) {
+//       $('.content').append(`<li>${resp[r].text}</li>`);
+//     }
+//   });
+// }
+
+const getFourRandomFacts = async () => {
+  const baseURL = 'http://numbersapi.com';
+  const facts = await Promise.all([
+    $.getJSON(`${baseURL}/${Math.floor(Math.random() * 100)}?json`),
+    $.getJSON(`${baseURL}/${Math.floor(Math.random() * 100)}?json`),
+    $.getJSON(`${baseURL}/${Math.floor(Math.random() * 100)}?json`),
+    $.getJSON(`${baseURL}/${Math.floor(Math.random() * 100)}?json`)
+  ]);
+
+  console.log(facts);
+
+  facts.forEach(fact => $('.content2').append(`<li>${fact.text}</li>`));
+};
 
 // function getMoreFavNumFacts() {
 //   factsArr = [];
@@ -47,31 +73,31 @@ function getMultipleNumFacts2() {
 //   });
 // }
 
-function getMoreFavNumFacts2() {
-  factsArr = [];
-  axios
-    .get('http://numbersapi.com/8?json')
-    .then(resp => {
-      console.log(resp);
-      factsArr.push(resp.data.text);
-      return axios.get('http://numbersapi.com/8?json');
-    })
-    .then(resp => {
-      factsArr.push(resp.data.text);
-      return axios.get('http://numbersapi.com/8?json');
-    })
-    .then(resp => {
-      factsArr.push(resp.data.text);
-      return axios.get('http://numbersapi.com/8?json');
-    })
-    .then(resp => {
-      factsArr.push(resp.data.text);
-      for (let i in factsArr) {
-        $('.content2').append(`<li> ${factsArr[i]} </li>`);
-      }
-    })
-    .catch(err => console.log(err));
-}
+// function getMoreFavNumFacts2() {
+//   factsArr = [];
+//   axios
+//     .get('http://numbersapi.com/8?json')
+//     .then(resp => {
+//       console.log(resp);
+//       factsArr.push(resp.data.text);
+//       return axios.get('http://numbersapi.com/8?json');
+//     })
+//     .then(resp => {
+//       factsArr.push(resp.data.text);
+//       return axios.get('http://numbersapi.com/8?json');
+//     })
+//     .then(resp => {
+//       factsArr.push(resp.data.text);
+//       return axios.get('http://numbersapi.com/8?json');
+//     })
+//     .then(resp => {
+//       factsArr.push(resp.data.text);
+//       for (let i in factsArr) {
+//         $('.content2').append(`<li> ${factsArr[i]} </li>`);
+//       }
+//     })
+//     .catch(err => console.log(err));
+// }
 
 // getNumberFact2();
 // getMultipleNumFacts2();
